@@ -34,9 +34,9 @@ target "Potatso" do
     pod 'AsyncSwift'
     pod 'SwiftColor'
     pod 'Appirater'
-    pod 'Eureka', :path => "./Library/Eureka/"
+    pod 'Eureka'
     pod 'MBProgressHUD'
-    pod 'CallbackURLKit', :path => "./Library/CallbackURLKit"
+    pod 'CallbackURLKit'
     pod 'ICDMaterialActivityIndicatorView', '~> 0.1.0'
     pod 'Reveal-iOS-SDK', '~> 1.6.2', :configurations => ['Debug']
     pod 'ICSPullToRefresh', '~> 0.6'
