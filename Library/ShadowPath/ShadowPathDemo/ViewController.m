@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "ShadowPath.h"
+//#import "ShadowPath.h"
 
 @interface ViewController ()
 
@@ -20,8 +20,8 @@
     // Do any additional setup after loading the view, typically from a nib.
 //    char *path = strdup([[[NSBundle mainBundle] pathForResource:@"config" ofType:@""] UTF8String]);
 //    shadowpath_main(path);
-    profile_t t;
-    start_ss_local_server(t);
+//    profile_t t;
+//    start_ss_local_server(t);
 }
 
 - (void)didReceiveMemoryWarning {

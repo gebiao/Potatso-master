@@ -18,5 +18,5 @@ FOUNDATION_EXPORT const unsigned char ShadowPathVersionString[];
 
 #import "jcc.h"
 #import "project.h"
-#import "AntinatServer.h"
 #import "shadowsocks.h"
+#import "AntinatServer.h"
