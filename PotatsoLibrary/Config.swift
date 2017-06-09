@@ -8,7 +8,6 @@
 
 import RealmSwift
 import PotatsoModel
-import YAML
 
 public enum ConfigError: Error {
     case downloadFail
@@ -42,9 +41,10 @@ open class Config {
     }
     
     open func setup(string configString: String) throws {
-        guard configString.characters.count > 0, let object = try? YAMLSerialization.object(withYAMLString: configString, options: kYAMLReadOptionStringScalars), let yaml = object as? [String: AnyObject] else {
+        guard configString.characters.count > 0, let object = try? JSONSerialization.jsonObject(with: configString.data(using: .utf8)!, options: .init(rawValue: 0)), let yaml = object as? [String: AnyObject] else {
             throw ConfigError.syntaxError
         }
+    
         self.configDict = yaml
         try setupModels()
     }
