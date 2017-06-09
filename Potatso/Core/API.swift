@@ -114,7 +114,7 @@ extension Rule: Mappable {
         guard let actionStr = map.JSON["action"] as? String, let action = RuleAction(rawValue: actionStr) else {
             return nil
         }
-        guard let typeStr = map.JSON["type"] as? String, let type = RuleType(rawValue: typeStr) else {
+        guard let typeStr = map.JSON["type"] as? String, let type = RuleTypes(rawValue: typeStr) else {
             return nil
         }
         self.init(type: type, action: action, value: pattern)

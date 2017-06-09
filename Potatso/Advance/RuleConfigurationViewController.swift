@@ -36,7 +36,7 @@ class RuleConfigurationViewController: FormViewController {
             self.rule = rule
             isEdit = true
         }else {
-            self.rule = Rule(type: RuleType.DomainSuffix, action: RuleAction.Proxy, value: "")
+            self.rule = Rule(type: RuleTypes.DomainSuffix, action: RuleAction.Proxy, value: "")
             isEdit = false
         }
         self.callback = callback
@@ -64,10 +64,10 @@ class RuleConfigurationViewController: FormViewController {
     
     func generateForm() {
         form +++ Section()
-            <<< PushRow<RuleType>(kRuleFormType) {
+            <<< PushRow<RuleTypes>(kRuleFormType) {
                 $0.title = "Type".localized()
                 $0.selectorTitle = "Choose type of rule".localized()
-                $0.options = [RuleType.DomainSuffix, RuleType.DomainMatch, RuleType.Domain, RuleType.IPCIDR, RuleType.GeoIP]
+                $0.options = [RuleTypes.DomainSuffix, RuleTypes.DomainMatch, RuleTypes.Domain, RuleTypes.IPCIDR, RuleTypes.GeoIP]
                 $0.value = self.rule.type
                 $0.disabled = Condition(booleanLiteral: !editable)
                 }.cellSetup({ (cell, row) -> () in
@@ -96,7 +96,7 @@ class RuleConfigurationViewController: FormViewController {
     func save() {
         do {
             let values = form.values()
-            guard let type = values[kRuleFormType] as? RuleType else {
+            guard let type = values[kRuleFormType] as? RuleTypes else {
                 throw "You must choose a type".localized()
             }
             guard let value = (values[kRuleFormValue] as? String)?.trimmingCharacters(in: CharacterSet.whitespaces), value.characters.count > 0 else {

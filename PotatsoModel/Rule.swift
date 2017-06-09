@@ -12,7 +12,7 @@ import PotatsoBase
 private let ruleValueKey = "value";
 private let ruleActionKey = "action";
 
-public enum RuleType: String {
+public enum RuleTypes: String {
     case URLMatch = "URL-MATCH"
     case URL = "URL"
     case Domain = "DOMAIN"
@@ -22,9 +22,9 @@ public enum RuleType: String {
     case IPCIDR = "IP-CIDR"
 }
 
-extension RuleType {
+extension RuleTypes {
     
-    public static func fromInt(_ intValue: Int) -> RuleType? {
+    public static func fromInt(_ intValue: Int) -> RuleTypes? {
         switch intValue {
         case 1:
             return .Domain
@@ -47,7 +47,7 @@ extension RuleType {
     
 }
 
-extension RuleType: CustomStringConvertible {
+extension RuleTypes: CustomStringConvertible {
     
     public var description: String {
         return rawValue
@@ -138,7 +138,7 @@ public enum RuleError: Error {
 //
 public final class Rule {
 
-    public var type: RuleType
+    public var type: RuleTypes
     public var value: String
     public var action: RuleAction
     
@@ -152,20 +152,20 @@ public final class Rule {
         let actionStr = parts[2].uppercased()
         let typeStr = parts[0].uppercased()
         let value = parts[1]
-        guard let type = RuleType(rawValue: typeStr), let action = RuleAction(rawValue: actionStr), value.characters.count > 0 else {
+        guard let type = RuleTypes(rawValue: typeStr), let action = RuleAction(rawValue: actionStr), value.characters.count > 0 else {
             throw RuleError.invalidRule(str)
         }
         self.init(type: type, action: action, value: value)
     }
     
-    public init(type: RuleType, action: RuleAction, value: String) {
+    public init(type: RuleTypes, action: RuleAction, value: String) {
         self.type = type
         self.value = value
         self.action = action
     }
 
     public convenience init?(json: [String: AnyObject]) {
-        guard let typeRaw = json["type"] as? String, let type = RuleType(rawValue: typeRaw) else {
+        guard let typeRaw = json["type"] as? String, let type = RuleTypes(rawValue: typeRaw) else {
             return nil
         }
         guard let actionRaw = json["action"] as? String, let action = RuleAction(rawValue: actionRaw) else {
