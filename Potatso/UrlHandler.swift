@@ -18,25 +18,20 @@ class UrlHandler: NSObject, AppLifeCycleProtocol {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let manager = callbackURLKit_Manager.shared
         manager.callbackURLScheme = callbackURLKit_Manager.urlSchemes?.first
-//        for action in [URLAction.ON, URLAction.OFF, URLAction.SWITCH] {
-//            manager[action.rawValue] = { parameters, success, failure, cancel in
-//                action.perform(nil, parameters: parameters) { error in
-////                    Async.main(after: 1, {
-////                        if let error = error {
-////                            _ = failure(error as NSError)
-////                        }else {
-////                            _ = success(nil)
-////                        }
-////                    })
-//                    if let error = error {
-//                        failure(error as NSError)
-//                    }else {
-//                        success(nil)
-//                    }
-//                    return
-//                }
-//            }
-//        }
+        for action in [URLAction.ON, URLAction.OFF, URLAction.SWITCH] {
+            manager[action.rawValue] = { parameters, success, failure, cancel in
+                action.perform(nil, parameters: parameters) { error in
+                    Async.main(after: 1, {
+                        if let error = error {
+//                            _ = failure(error as NSError)
+                        }else {
+//                            _ = success(nil)
+                        }
+                    })
+                    return
+                }
+            }
+        }
         return true
     }
     
