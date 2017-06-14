@@ -81,7 +81,7 @@ typedef ADDRESS_FAMILY sa_family_t;
 #if MMDB_UINT128_USING_MODE
 typedef unsigned int mmdb_uint128_t __attribute__ ((__mode__(TI)));
 #else
-typedef unsigned __int128 mmdb_uint128_t;
+typedef unsigned int mmdb_uint128_t;
 #endif
 #endif
 
