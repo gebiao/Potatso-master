@@ -20,12 +20,15 @@ class UrlHandler: NSObject, AppLifeCycleProtocol {
         manager.callbackURLScheme = callbackURLKit_Manager.urlSchemes?.first
         for action in [URLAction.ON, URLAction.OFF, URLAction.SWITCH] {
             manager[action.rawValue] = { parameters, success, failure, cancel in
+                var arr = [success, failure] as [Any]
                 action.perform(nil, parameters: parameters) { error in
                     Async.main(after: 1, {
                         if let error = error {
-//                            _ = failure(error as NSError)
+                            let fail = arr[0] as! FailureCallback
+                            fail(error as NSError)
                         }else {
-//                            _ = success(nil)
+                            let suc = arr[1] as! SuccessCallback
+                            suc(nil)
                         }
                     })
                     return
